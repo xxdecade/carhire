@@ -1,0 +1,6 @@
+class Hire {
+    constructor(id) {
+    }
+}
+
+
