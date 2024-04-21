@@ -133,7 +133,7 @@ class HireHome {
                             <input id = "forget_sub" type = "submit" value = "修改">
                         </div>
 
-                        <p class="tip">返回登录界面?<a id="forget_login" href="#">
+                        <p class="tip">返回登录?<a id="forget_login" href="#">
                                 点击这里
                             </a></p>
                     </form>
@@ -188,16 +188,17 @@ class HireHome {
 
     add_event_login() {
         let outer = this;
+        
+        this.$login_submit.click(function() {
+            console.log("login");
+            outer.login_on_remote();
+        });
 
         this.$login_register.click(function() {
             outer.register();
         });
         this.$login_forget.click(function() {
             outer.forget();
-        });
-
-        this.$login_submit.click(function() {
-            outer.login_on_remote();
         });
     }
 
@@ -215,6 +216,10 @@ class HireHome {
 
     add_event_forget() {
         let outer = this;
+
+        this.$forget_submit.click(function() {
+            outer.forget_on_remote();
+        });
 
         this.$forget_login.click(function() {
             outer.login();
@@ -262,7 +267,7 @@ class HireHome {
             },
             success: function(resp) {
                 if (resp.result === "success") {
-                    location.reload();
+                    location.reload();                    
                 } else {
                     outer.$register_error.html(resp.result);
                 }
@@ -271,7 +276,28 @@ class HireHome {
     }
 
     forget_on_remote() { //在远程服务器上修改密码
-            
+        let outer = this;
+        let username = this.$forget_username.val();
+        let password = this.$forget_password.val();
+        let password2 = this.$forget_password2.val();
+        this.$forget_error.empty();
+
+        $.ajax({
+            url: "http://47.122.4.91:8000/settings/forget",
+            type: "GET",
+            data: {
+                username: username,
+                password: password,
+                password2: password2,
+            },
+            success: function(resp) {
+                if (resp.result === "success") {
+                    outer.$forget_error.html("修改成功!");
+                } else {
+                    outer.$forget_error.html(resp.result);
+                }
+            }
+        });
     }
 
     logout_on_remote() { //在远程服务器上登出
@@ -287,14 +313,14 @@ class HireHome {
     }
 
     register() {
-        this.$login.hide();
         this.$register.show();
+        this.$login.hide();
         this.$forget.hide();
     }
 
     login() {
-        this.$register.hide();
         this.$login.show();
+        this.$register.hide();
         this.$forget.hide();
     }
 
