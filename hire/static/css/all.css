@@ -43,6 +43,7 @@ section {
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-right: 1px solid rgba(255, 255, 255, 0.2);
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 40px;
 }
 
 .form{
@@ -104,7 +105,7 @@ section {
     color: #fff;
 }
 
-.form .inputBox input[type="submit"] {
+.form .inputBox input[type="button"] {
     background: #fff;
     color: #666;
     max-width: 100px;

@@ -71,7 +71,7 @@ class HireHome {
                         </div>
                         
                         <div class="inputBox">
-                            <input id = "login_sub" type = "submit" value = "登录">
+                            <input id = "login_sub" type = "button" value = "登录">
                         </div>
 
                         <p class="tip">忘记密码?<a id="login_forget" href="#">
@@ -102,7 +102,7 @@ class HireHome {
                         </div>
                         
                         <div class="inputBox">
-                            <input id = "register_sub" type = "submit" value = "注册">
+                            <input id = "register_sub" type = "button" value = "注册">
                         </div>
 
                         <p class="tip">已有账号?<a id="register_login" href="#">
@@ -130,7 +130,7 @@ class HireHome {
                         </div>
                         
                         <div class="inputBox">
-                            <input id = "forget_sub" type = "submit" value = "修改">
+                            <input id = "forget_sub" type = "button" value = "修改">
                         </div>
 
                         <p class="tip">返回登录?<a id="forget_login" href="#">
@@ -210,6 +210,7 @@ class HireHome {
         });
 
         this.$register_submit.click(function() {
+            console.log("register");
             outer.register_on_remote();
         });
     }
@@ -218,6 +219,7 @@ class HireHome {
         let outer = this;
 
         this.$forget_submit.click(function() {
+            console.log("forget");
             outer.forget_on_remote();
         });
 
@@ -338,7 +340,6 @@ class HireHome {
             success: function(resp) {
                 if (resp.result === "success") {
                     outer.username = resp.username;
-                    outer.photo = resp.photo;
                     outer.phone = resp.phone;
                     outer.hide();
                     outer.root.home.show();
