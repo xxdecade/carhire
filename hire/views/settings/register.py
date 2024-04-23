@@ -22,7 +22,7 @@ def register(request):
         })
     user = User.objects.create_user(username=username, password=password)
     user.save()
-    Client.objects.create(user=user)
+    Client.objects.create(user=user, name=user.username)
     login(request, user)
     return JsonResponse({
         'result': "success"

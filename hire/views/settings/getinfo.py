@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
 from hire.models.client.client import Client 
 
 def getinfo(request):
@@ -8,9 +9,15 @@ def getinfo(request):
             'result': "用户未登录",
         })
     else:
-        client = Client.objects.get(user=request.user)
-        return JsonResponse({
-            'result': "success",
-            'username': client.user.username,
-            'phone': client.phone,
-        })
+        try:
+            client = Client.objects.get(user=user)
+            return JsonResponse({
+                'result': "success",
+                'username': client.user.username,
+                'phone': client.phone,
+            })
+        except ObjectDoesNotExist:
+            return JsonResponse({
+                'result': "客户信息不存在",
+            })
+

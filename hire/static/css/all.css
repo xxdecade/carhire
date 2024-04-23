@@ -116,12 +116,24 @@ section {
 
 .error_message {
     color: red;
-    font-size: 1.1vh;
+    font-size: 0.7em;
     display: inline;
     float: right;
     margin-top: 3px;
     margin-right: 10px;
     user-select: none;
+    font-weight:600;
+}
+
+.success_message {
+    color: rgb(13, 231, 86);
+    font-size: 0.7em;
+    display: inline;
+    float: right;
+    margin-top: 3px;
+    margin-right: 10px;
+    user-select: none;
+    font-weight:600;
 }
 
 .tip {

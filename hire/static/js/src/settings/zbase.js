@@ -61,6 +61,9 @@ class Settings {
 
                         <div id="register_error" class="error_message">
                         </div>
+
+                        <div id="register_success" class="success_message">
+                        </div>
                         
                         <div class="inputBox">
                             <input id = "register_sub" type = "button" value = "注册">
@@ -88,6 +91,9 @@ class Settings {
                         </div>
 
                         <div id="forget_error" class="error_message">
+                        </div>
+
+                        <div id="forget_success" class="success_message">
                         </div>
                         
                         <div class="inputBox">
@@ -119,6 +125,7 @@ class Settings {
         this.$register_password2 = this.$register.find('input[id="register_psw2"]');
         this.$register_submit = this.$register.find('input[id="register_sub"]');
         this.$register_error = this.$register.find('div[id="register_error"]');
+        this.$register_success = this.$register.find('div[id="register_success"]');
         this.$register_login = this.$register.find('a[id="register_login"]');
         this.$register.hide();
 
@@ -128,6 +135,7 @@ class Settings {
         this.$forget_password2 = this.$forget.find('input[id="forget_psw2"]');
         this.$forget_submit = this.$forget.find('input[id="forget_sub"]');
         this.$forget_error = this.$forget.find('div[id="forget_error"]');
+        this.$forget_success = this.$forget.find('div[id="forget_success"]');
         this.$forget_login = this.$forget.find('a[id="forget_login"]');
         this.$forget.hide();
 
@@ -230,7 +238,10 @@ class Settings {
             },
             success: function(resp) {
                 if (resp.result === "success") {
-                    location.reload();                    
+                    outer.$register_success.html("注册成功!3秒后自动登录");
+                    setTimeout(function() {
+                        location.reload();
+                    }, 3000);                 
                 } else {
                     outer.$register_error.html(resp.result);
                 }
@@ -255,7 +266,7 @@ class Settings {
             },
             success: function(resp) {
                 if (resp.result === "success") {
-                    outer.$forget_error.html("修改成功!");
+                    outer.$forget_success.html("修改成功!请返回登录");
                 } else {
                     outer.$forget_error.html(resp.result);
                 }
