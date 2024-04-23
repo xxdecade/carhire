@@ -1,21 +1,19 @@
-.hire_home {
-    background-color: #df3434;
-    padding: 20px;
-    margin-top: 20px;
-    border-radius: 5px;
+.menu {
+    list-style: none;
 }
 
-.logout {
-    padding: 10px;
-    margin-top: 20px;
-    border-radius: 5px;
-    color: white;
+.logout button {
+    border: none;
+    cursor: pointer;
+    color: #0f0f0f;
+    transition: background-color 0.3s;
+    background-color: transparent; 
+    margin-right: 20px;
+    font-size: 12px;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.logout button:hover {
+    color: #ff0505;
 }
 
 section {

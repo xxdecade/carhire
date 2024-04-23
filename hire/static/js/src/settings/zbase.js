@@ -11,7 +11,7 @@ class Settings {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-            <title>汽车租赁系统登陆</title>
+            <title>汽车租赁系统</title>
         </head>
 
         <body>
