@@ -28,24 +28,25 @@ class HireHome {
                             </li>
                         </ul>
 
-                        <div class="user_info_dropdown">
-                            <button class="user_info_dropdown_button">
+                        <div class="userinfo_dropdown">
+                            <button class="userinfo_dropdown_button">
                                 <img class="user_avatar" src="static/image/home/xxg_avatar.jpg">
                             </button>
                         </div>
-                            <ul class="user_info_dropdown_menu">
-                                <li id="user_info" class="dropdown_menu_item">
-                                    <button>个人信息</button>
-                                </li>
 
-                                <li id="user_order" class="dropdown_menu_item">
-                                    <button>我的订单</button>
-                                </li>
+                        <ul class="userinfo_dropdown_menu">
+                            <li class="dropdown_menu_item">
+                                <button id="userinfo_button">个人信息</button>
+                            </li>
 
-                                <li id="logout" class="logout dropdown_menu_item">
-                                    <button>退出登录</button>
-                                </li>
-                            </ul>
+                            <li class="dropdown_menu_item">
+                                <button id="userorder_button">我的订单</button>
+                            </li>
+
+                            <li class="logout dropdown_menu_item">
+                                <button id="logout_button">退出登录</button>
+                            </li>
+                        </ul>
 
                         <div class="header_contact">
                             <div class="telephone">
@@ -63,7 +64,7 @@ class HireHome {
                         <div class="car_select">
                             <a>选车框</a>
                         </div>
-                    <div>
+                    </div>
                     <div class="car_recommend">
                         <div class="car_recommend_info">
                             <a>推荐车辆</a>
@@ -83,6 +84,49 @@ class HireHome {
                     <a>精彩活动</a>
                 </div>
 
+                <div id="userinfo_page" class="content">
+                    <div class="main_content">
+                        <div class="userinfo_preview">
+                            avatar
+                        </div>
+
+                        <ul id="userinfo_form" class="userinfo_form">
+                            <li id="user_id" class="userinfo_form_item">
+                                <div class="col_1">用户ID</div>
+                                <div class="col_2">ID</div>
+                            </li>
+
+                            <li id="user_name" class="userinfo_form_item">
+                                <div class="col_1">用户账号</div>
+
+                                <div class="col_2">
+                                    <div id="user_name_output">
+                                        <div class="info_output">current_username</div>
+                                        <button id="user_name_edit_button">编辑</button>
+                                    </div>
+                                    <div id="user_name_edit">
+                                        <div type="text" class="user_name_input"></div>
+                                        <button id="user_name_edit_submit_button">提交</button>
+                                        <button id="user_name_edit_cancal_button">取消</button>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li id="user_sex" class="userinfo_form_item">
+                                <div class="col_1">性别</div>
+                            </li>
+
+                            <li id="user_phone" class="userinfo_form_item">
+                                <div class="col_1">联系方式</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="userorder_page" class="content">
+                    <a>我的订单</a>
+                </div>
+
             </div>
         </body>
         `);
@@ -91,7 +135,7 @@ class HireHome {
 
         this.$hire_mainpage = this.$home.find('div[id="hire_mainpage"]');
         this.$hire_mainpage_button = this.$home.find('button[id="hire_mainpage_button"]');
-        this.$hire_mainpage.show();
+        ///this.$hire_mainpage.hide();
 
         this.$hire_detial = this.$home.find('div[id="hire_detial"]');
         this.$hire_detial_button = this.$home.find('button[id="hire_detial_button"]');
@@ -105,12 +149,27 @@ class HireHome {
         this.$hire_activity_button = this.$home.find('button[id="hire_activity_button"]');
         this.$hire_activity.hide();
 
-        this.$dropdown_menu = this.$home.find('ul[class="user_info_dropdown_menu"]');
+        this.$userinfo_page = this.$home.find('div[id="userinfo_page"]');
+        this.$userinfo_page_button = this.$home.find('button[id="userinfo_button"]');
+        this.$userinfo_page.hide();
+
+        this.$userorder_page = this.$home.find('div[id="userorder_page"]');
+        this.$userorder_page_button = this.$home.find('button[id="userorder_button"]');
+        this.$userorder_page.hide();
+
+        this.$dropdown_menu = this.$home.find('ul[class="userinfo_dropdown_menu"]');
         this.$dropdown_menu.hide();
 
-        this.$dropdown_button = this.$home.find('button[class="user_info_dropdown_button"]');
+        this.$dropdown_button = this.$home.find('button[class="userinfo_dropdown_button"]');
 
-        this.$logout = this.$home.find('.logout button');
+        this.$userinfo_name_output = this.$home.find('div[id="user_name_output"]');
+        this.$userinfo_name_edit_button = this.$home.find('button[id="user_name_edit_button"]');
+        this.$userinfo_name_edit = this.$home.find('div[id="user_name_edit"]');
+        this.$userinfo_name_edit_submit_button = this.$home.find('button[id="user_name_edit_submit_button"]');
+        this.$userinfo_name_edit_cancal_button = this.$home.find('button[id="user_name_edit_cancal_button"]');
+        this.$userinfo_name_edit.hide();
+
+        this.$logout = this.$home.find('button[id="logout_button"]');
     
         this.start();
     }
@@ -120,12 +179,16 @@ class HireHome {
     }
 
     add_listening_events() {
-        this.add_event_logout();
-        this.add_event_show_dropdown_menu();
         this.add_event_click_mainpage();
         this.add_event_click_detial();
         this.add_event_click_map();
         this.add_event_click_activity();
+        this.add_event_click_userinfo();
+        this.add_event_click_userorder();
+        this.add_event_logout();
+        this.add_event_show_dropdown_menu();
+        this.add_event_show_userinfo_name_edit();
+        this.add_event_show_userinfo_name_output();
     }
 
     add_event_click_mainpage() {
@@ -133,6 +196,8 @@ class HireHome {
 
         this.$hire_mainpage_button.on('click', function() {
             outer.show_mainpage();
+            $('.menu_item button').removeClass('current');
+            outer.$hire_mainpage_button.addClass('current');
         });
     }
 
@@ -141,6 +206,8 @@ class HireHome {
 
         this.$hire_detial_button.on('click', function() {
             outer.show_detial();
+            $('.menu_item button').removeClass('current');
+            outer.$hire_detial_button.addClass('current');
         });
     }
 
@@ -149,6 +216,8 @@ class HireHome {
 
         this.$hire_map_button.on('click', function() {
             outer.show_map();
+            $('.menu_item button').removeClass('current');
+            outer.$hire_map_button.addClass('current');
         });
     }
 
@@ -157,39 +226,34 @@ class HireHome {
 
         this.$hire_activity_button.on('click', function() {
             outer.show_activity();
+            $('.menu_item button').removeClass('current');
+            outer.$hire_activity_button.addClass('current');
         });
     }
 
-    show_mainpage() {
-        this.$hire_mainpage.show();
-        this.$hire_detial.hide();
-        this.$hire_map.hide();
-        this.$hire_activity.hide();
+    add_event_click_userinfo() {
+        let outer = this;
+
+        this.$userinfo_page_button.on('click', function() {
+            outer.show_userinfo_page();
+            $('.menu_item button').removeClass('current');
+            outer.$dropdown_menu.hide();
+        });
     }
 
-    show_detial() {
-        this.$hire_detial.show();
-        this.$hire_mainpage.hide();
-        this.$hire_map.hide();
-        this.$hire_activity.hide();
-    }
+    add_event_click_userorder() {
+        let outer = this;
 
-    show_map() {
-        this.$hire_map.show();
-        this.$hire_mainpage.hide();
-        this.$hire_detial.hide();
-        this.$hire_activity.hide();
+        this.$userorder_page_button.on('click', function() {
+            outer.show_userorder_page();
+            $('.menu_item button').removeClass('current');
+            outer.$dropdown_menu.hide();
+        });
     }
-
-    show_activity() {
-        this.$hire_activity.show();
-        this.$hire_mainpage.hide();
-        this.$hire_detial.hide();
-        this.$hire_map.hide();
-    }
-
+    
     add_event_logout() {
         let outer = this;
+
         this.$logout.on('click', function() {
             outer.root.settings.logout_on_remote();
         });
@@ -205,6 +269,86 @@ class HireHome {
                 outer.$dropdown_menu.hide();
             }
         });
+    }
+
+    add_event_show_userinfo_name_edit() {
+        let outer = this;
+
+        this.$userinfo_name_edit_button.on('click', function() {
+            outer.show_userinfo_name_edit();
+        });
+    }
+
+    add_event_show_userinfo_name_output() {
+        let outer = this;
+
+        this.$userinfo_name_edit_cancal_button.on('click', function() {
+            outer.show_userinfo_name_output();
+        });
+    }
+
+    show_mainpage() {
+        this.$hire_mainpage.show();
+        this.$hire_detial.hide();
+        this.$hire_map.hide();
+        this.$hire_activity.hide();
+        this.$userinfo_page.hide();
+        this.$userorder_page.hide();
+    }
+
+    show_detial() {
+        this.$hire_detial.show();
+        this.$hire_mainpage.hide();
+        this.$hire_map.hide();
+        this.$hire_activity.hide();
+        this.$userinfo_page.hide();
+        this.$userorder_page.hide();
+    }
+
+    show_map() {
+        this.$hire_map.show();
+        this.$hire_mainpage.hide();
+        this.$hire_detial.hide();
+        this.$hire_activity.hide();
+        this.$userinfo_page.hide();
+        this.$userorder_page.hide();
+    }
+
+    show_activity() {
+        this.$hire_activity.show();
+        this.$hire_mainpage.hide();
+        this.$hire_detial.hide();
+        this.$hire_map.hide();
+        this.$userinfo_page.hide();
+        this.$userorder_page.hide();
+    }
+
+    show_userinfo_page() {
+        this.$userinfo_page.show();
+        this.$hire_mainpage.hide();
+        this.$hire_detial.hide();
+        this.$hire_map.hide();
+        this.$hire_activity.hide();
+        this.$userorder_page.hide();
+    }
+
+    show_userorder_page() {
+        this.$userorder_page.show();
+        this.$userinfo_page.hide();
+        this.$hire_mainpage.hide();
+        this.$hire_detial.hide();
+        this.$hire_map.hide();
+        this.$hire_activity.hide();
+    }
+
+    show_userinfo_name_output() {
+        this.$userinfo_name_output.show();
+        this.$userinfo_name_edit.hide();
+    }
+
+    show_userinfo_name_edit() {
+        this.$userinfo_name_edit.show();
+        this.$userinfo_name_output.hide();
     }
 
     show() {
