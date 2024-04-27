@@ -100,12 +100,13 @@ class HireHome {
                                 <div class="col_1">用户账号</div>
 
                                 <div class="col_2">
-                                    <div id="user_name_output">
-                                        <div class="info_output">current_username</div>
+                                    <div id="user_name_output" class="col_2_form">
+                                        <div class="info_output"></div>
                                         <button id="user_name_edit_button">编辑</button>
                                     </div>
-                                    <div id="user_name_edit">
-                                        <div type="text" class="user_name_input"></div>
+                                    <div id="user_name_edit" class="col_2_form">
+                                        <input type="text" class="user_name_input"></input>
+                                        <div id="user_name_edit_error" class="error_message"></div>
                                         <button id="user_name_edit_submit_button">提交</button>
                                         <button id="user_name_edit_cancal_button">取消</button>
                                     </div>
@@ -137,6 +138,7 @@ class HireHome {
         this.$hire_mainpage_button = this.$home.find('button[id="hire_mainpage_button"]');
         ///this.$hire_mainpage.hide();
 
+
         this.$hire_detial = this.$home.find('div[id="hire_detial"]');
         this.$hire_detial_button = this.$home.find('button[id="hire_detial_button"]');
         this.$hire_detial.hide();
@@ -167,6 +169,8 @@ class HireHome {
         this.$userinfo_name_edit = this.$home.find('div[id="user_name_edit"]');
         this.$userinfo_name_edit_submit_button = this.$home.find('button[id="user_name_edit_submit_button"]');
         this.$userinfo_name_edit_cancal_button = this.$home.find('button[id="user_name_edit_cancal_button"]');
+        this.$userinfo_name_newname = this.$home.find('input[class="user_name_input"]');
+        this.$userinfo_name_edit_error = this.$home.find('div[id="user_name_edit_error"]');
         this.$userinfo_name_edit.hide();
 
         this.$logout = this.$home.find('button[id="logout_button"]');
@@ -189,6 +193,8 @@ class HireHome {
         this.add_event_show_dropdown_menu();
         this.add_event_show_userinfo_name_edit();
         this.add_event_show_userinfo_name_output();
+        this.show_userinfo_name();
+        this.add_event_submit_userinfo_name();
     }
 
     add_event_click_mainpage() {
@@ -284,6 +290,49 @@ class HireHome {
 
         this.$userinfo_name_edit_cancal_button.on('click', function() {
             outer.show_userinfo_name_output();
+        });
+    }
+
+    add_event_submit_userinfo_name() {
+        let outer = this;
+
+        this.$userinfo_name_edit_submit_button.on('click', function() {
+            outer.edit_userinfo_name();
+        });
+    }
+
+    show_userinfo_name() {
+        let outer = this;
+        
+        $.ajax({
+            url: '/home/show_name',
+            type: 'GET',
+            success: function(resp) {
+                outer.$userinfo_name_output.find('.info_output').text(resp.result);
+            },
+        });
+    }
+
+    edit_userinfo_name() {
+        let outer = this;
+        let newname = this.$userinfo_name_newname.val();
+        this.$userinfo_name_edit_error.empty();
+
+        $.ajax({
+            url: '/home/edit_name',
+            type: 'GET',
+            data: {
+                newname: newname,
+            },
+            success: function(resp) {
+                console.log(newname, resp);
+                if (resp.result == 'success') {
+                    outer.show_userinfo_name_output();
+                    outer.show_userinfo_name();
+                } else {
+                    outer.$userinfo_name_edit_error.text(resp.result);
+                }
+            },
         });
     }
 
