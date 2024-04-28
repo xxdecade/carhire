@@ -281,6 +281,8 @@ class Settings {
             success: function(resp) {
                 if (resp.result === "success") {
                     location.reload();
+                } else {
+                    console.log(resp.result);
                 }
             }
         })
@@ -314,7 +316,11 @@ class Settings {
                     outer.username = resp.username;
                     outer.phone = resp.phone;
                     outer.hide();
-                    outer.root.home.show();
+                    if (resp.username === "admin") {
+                        outer.root.adminhome.show();
+                    } else {
+                        outer.root.home.show();
+                    }
                 } else {
                     outer.login();
                 }

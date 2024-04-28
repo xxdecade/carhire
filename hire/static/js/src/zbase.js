@@ -5,6 +5,7 @@ class Hire {
 
         this.settings = new Settings(this);
         this.home = new HireHome(this);
+        this.adminhome = new AdminHome(this);
 
         this.start();
     }

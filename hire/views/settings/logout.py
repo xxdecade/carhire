@@ -5,7 +5,7 @@ def signout(request):
     user = request.user
     if not user.is_authenticated:
         return JsonResponse({
-            'result': "success",
+            'result': "error",
         })
     logout(request)
     return JsonResponse({
