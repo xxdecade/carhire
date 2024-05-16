@@ -3,3 +3,4 @@ from hire.models.vehicle.vehicle import Vehicle
 
 def insert_vehicle(request):
     
+    

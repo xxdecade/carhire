@@ -204,7 +204,7 @@ class Settings {
         this.$login_error.empty();
 
         $.ajax({
-            url: "http://47.122.4.91:8000/settings/login/",
+            url: "/settings/login/",
             type: "GET",
             data: {
                 username: username,
@@ -229,7 +229,7 @@ class Settings {
         this.$register_error.empty();
         
         $.ajax({
-            url: "http://47.122.4.91:8000/settings/register/",
+            url: "/settings/register/",
             type: "GET",
             data: {
                 username: username,
@@ -257,7 +257,7 @@ class Settings {
         this.$forget_error.empty();
 
         $.ajax({
-            url: "http://47.122.4.91:8000/settings/forget",
+            url: "/settings/forget",
             type: "GET",
             data: {
                 username: username,
@@ -276,7 +276,7 @@ class Settings {
 
     logout_on_remote() { //在远程服务器上登出
         $.ajax({
-            url: "http://47.122.4.91:8000/settings/logout/",
+            url: "/settings/logout/",
             type: "GET",
             success: function(resp) {
                 if (resp.result === "success") {
