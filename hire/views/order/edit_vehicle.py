@@ -11,6 +11,7 @@ def edit_vehicle(request):
         vehicle = Vehicle.objects.get(id=vehicle_id)
         
         # 更新车辆信息
+        vehicle.store = data.get('store', vehicle.store)
         vehicle.brand = data.get('brand', vehicle.brand)
         vehicle.model = data.get('model', vehicle.model)
         vehicle.category = data.get('category', vehicle.category)

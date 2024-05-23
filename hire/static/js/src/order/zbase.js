@@ -7,10 +7,13 @@ class AdminHome {
                 <h1>管理员界面</h1>
                 <table id="vehicle_table" border="1">
                     <tr>
+                        <th>所在店铺</th>
                         <th>品牌</th>
                         <th>型号</th>
                         <th>类别</th>
                         <th>是否出租</th>
+                        <th>出租时间</th>
+                        <th>归还时间</th>
                         <th>租赁价格（元/天）</th>
                         <th>操作</th>
                     </tr>
@@ -54,12 +57,17 @@ class AdminHome {
     render_vehicles(vehicles) {
         const $table = $('#vehicle_table');
         vehicles.forEach((vehicle) => {
+            const hireInfo = vehicle.is_hired
+                ? `<td>${vehicle.hire_start}</td><td>${vehicle.hire_end}</td>`
+                : '<td></td><td></td>';
             const $row = $(`
                 <tr>
+                    <td>${vehicle.store}</td>
                     <td>${vehicle.brand}</td>
                     <td>${vehicle.model}</td>
                     <td>${vehicle.category}</td>
                     <td>${vehicle.is_hired ? '是' : '否'}</td>
+                    ${hireInfo}
                     <td>${vehicle.hire_price}</td>
                     <td>
                         <button class="edit_button" data-id="${vehicle.id}">编辑</button>
@@ -70,6 +78,7 @@ class AdminHome {
             $table.append($row);
         });
     }
+    
 
     add_event_add_vehicle() {
         let outer = this;
@@ -84,6 +93,13 @@ class AdminHome {
         const $form = $(`
             <form id="add_vehicle_form">
                 <h2>添加新车辆</h2>
+                <select id="store" name="store" required>
+                    <option value="南京浦口店">南京浦口店</option>
+                    <option value="南京鼓楼店">南京鼓楼店</option>
+                    <option value="南京江宁店">南京江宁店</option>
+                    <option value="南京雨花店">南京雨花店</option>
+                    <option value="南京秦淮店">南京秦淮店</option>
+                </select><br>
                 <label for="brand">品牌:</label>
                 <input type="text" id="brand" name="brand" required><br>
                 <label for="model">型号:</label>
@@ -151,6 +167,13 @@ class AdminHome {
                 const $form = $(`
                     <form id="edit_vehicle_form">
                         <h2>编辑车辆</h2>
+                        <select id="store" name="store" required>
+                        <option value="南京浦口店" ${vehicle.store === '南京浦口店' ? 'selected' : ''}>南京浦口店</option>
+                        <option value="南京鼓楼店" ${vehicle.store === '南京鼓楼店' ? 'selected' : ''}>南京鼓楼店</option>
+                        <option value="南京江宁店" ${vehicle.store === '南京江宁店' ? 'selected' : ''}>南京江宁店</option>
+                        <option value="南京雨花店" ${vehicle.store === '南京雨花店' ? 'selected' : ''}>南京雨花店</option>
+                        <option value="南京秦淮店" ${vehicle.store === '南京秦淮店' ? 'selected' : ''}>南京秦淮店</option>
+                        </select><br>
                         <input type="hidden" id="id" name="id" value="${vehicle.id}" required>
                         <label for="brand">品牌:</label>
                         <input type="text" id="brand" name="brand" value="${vehicle.brand}" required><br>

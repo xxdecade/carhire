@@ -7,6 +7,7 @@ def get_vehicle_info(request):
     vehicle_list = [
         {
             'id': vehicle.id,
+            'store': vehicle.store,
             'brand': vehicle.brand,
             'model': vehicle.model,
             'category': vehicle.get_category_display(),

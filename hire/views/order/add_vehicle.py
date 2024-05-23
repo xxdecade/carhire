@@ -8,6 +8,7 @@ def add_vehicle(request):
         
         # 创建新的Vehicle实例
         vehicle = Vehicle(
+            store=data['store'],
             brand=data['brand'],
             model=data['model'],
             category=data['category'],

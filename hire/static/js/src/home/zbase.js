@@ -62,7 +62,6 @@ class HireHome {
                         <a>广告</a>
 
                         <div class="car_select">
-                            <a>选车框</a>
                         </div>
                     </div>
                     <div class="car_recommend">
@@ -195,6 +194,8 @@ class HireHome {
         this.add_event_show_userinfo_name_output();
         this.show_userinfo_name();
         this.add_event_submit_userinfo_name();
+        this.show_car_select();
+        this.add_event_car_select();
     }
 
     add_event_click_mainpage() {
@@ -335,6 +336,44 @@ class HireHome {
             },
         });
     }
+
+    add_event_car_select() {
+        let outer = this;
+        this.$car_select_submit_button.on('click', function() {
+            let store = outer.$store_select.val();
+            let time = outer.$time_select.val();
+            console.log(store, time);
+        });
+    }
+    
+
+    show_car_select() {
+        let outer = this;
+        this.$car_select = $(`
+            <div class="car_select_body">
+                <!-- Store Selection -->
+                <label for="store">门店:</label>
+                <select id="store" class="car_select_dropdown">
+                    <option value="all_store">不限</option>
+                    <option value="pukou<">南京浦口店</option>
+                    <option value="gulou">南京鼓楼店</option>
+                    <option value="jiangning">南京江宁店</option>
+                    <option value="yuhua">南京雨花店</option>
+                    <option value="qinhuai">南京秦淮店</option>
+                </select>
+
+                <label for="time">时间:</label>
+                <input type="datetime-local" id="time" class="car_select_input">
+
+                <button id="car_select_submit_button" class="car_select_submit">提交</button>
+            </div>
+        `);
+        this.$car_select.appendTo(this.$home.find('.car_select'));
+        this.$store_select = this.$car_select.find('#store');
+        this.$time_select = this.$car_select.find('#time');
+        this.$car_select_submit_button = this.$car_select.find('#car_select_submit_button');
+    }
+    
 
     show_mainpage() {
         this.$hire_mainpage.show();
