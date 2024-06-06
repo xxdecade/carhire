@@ -59,24 +59,37 @@ class HireHome {
 
                 <div id="hire_mainpage" class="content">
                     <div class="banner">
-                        <a>广告</a>
+                        <img class="car_img" src="static/image/home/carimg.png">
 
                         <div class="car_select">
                         </div>
                     </div>
                     <div class="car_recommend">
                         <div class="car_recommend_info">
-                            <a>推荐车辆</a>
+                            <img class="car_recommed" src="static/image/home/car_recommed.png">
                         </div>
                     </div>
                 </div>
 
                 <div id="hire_detial" class="content">
-                    <a>租车详情</a>
+                    <div>
+                        <br><br><br>
+                        <table id="vehicle_table1" border="1">
+                            <tr>
+                                <th>所在店铺</th>
+                                <th>品牌</th>
+                                <th>型号</th>
+                                <th>类别</th>
+                                <th>租赁价格（元/天）</th>
+                                <th>是否在租</th>
+                                <th>操作</th>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
 
                 <div id="hire_map" class="content">
-                    <a>网点查询</a>
+                    <div id="map"></div>
                 </div>
 
                 <div id="hire_activity" class="content">
@@ -86,13 +99,12 @@ class HireHome {
                 <div id="userinfo_page" class="content">
                     <div class="main_content">
                         <div class="userinfo_preview">
-                            avatar
+                            
                         </div>
 
                         <ul id="userinfo_form" class="userinfo_form">
                             <li id="user_id" class="userinfo_form_item">
-                                <div class="col_1">用户ID</div>
-                                <div class="col_2">ID</div>
+                            
                             </li>
 
                             <li id="user_name" class="userinfo_form_item">
@@ -107,25 +119,68 @@ class HireHome {
                                         <input type="text" class="user_name_input"></input>
                                         <div id="user_name_edit_error" class="error_message"></div>
                                         <button id="user_name_edit_submit_button">提交</button>
-                                        <button id="user_name_edit_cancal_button">取消</button>
+                                        <button id="user_name_edit_cancel_button">取消</button>
                                     </div>
                                 </div>
                             </li>
 
                             <li id="user_sex" class="userinfo_form_item">
                                 <div class="col_1">性别</div>
+                                <div class="col_2">
+                                    <div id="user_sex_output" class="col_2_form">
+                                        <div class="info_output"></div>
+                                        <button id="user_sex_edit_button">编辑</button>
+                                    </div>
+                                    <div id="user_sex_edit" class="col_2_form">
+                                        <select class="user_sex_input">
+                                            <option value="男">男</option>
+                                            <option value="女">女</option>
+                                            <option value="未知">其他</option>
+                                        </select>
+                                        <div id="user_sex_edit_error" class="error_message"></div>
+                                        <button id="user_sex_edit_submit_button">提交</button>
+                                        <button id="user_sex_edit_cancel_button">取消</button>
+                                    </div>
+                                </div>
                             </li>
 
                             <li id="user_phone" class="userinfo_form_item">
                                 <div class="col_1">联系方式</div>
+
+                                <div class="col_2">
+                                    <div id="user_phone_output" class="col_2_form">
+                                        <div class="info_output"></div>
+                                        <button id="user_phone_edit_button">编辑</button>
+                                    </div>
+                                    <div id="user_phone_edit" class="col_2_form">
+                                        <input type="text" class="user_phone_input"></input>
+                                        <div id="user_phone_edit_error" class="error_message"></div>
+                                        <button id="user_phone_edit_submit_button">提交</button>
+                                        <button id="user_phone_edit_cancel_button">取消</button>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                     </div>
                 </div>
 
+
                 <div id="userorder_page" class="content">
+                    <br><br><br>
                     <a>我的订单</a>
+                    <table id="user_order_table" border="1">
+                        <tr>
+                            <th>所在店铺</th>
+                            <th>品牌</th>
+                            <th>型号</th>
+                            <th>类别</th>
+                            <th>租用日期</th>
+                            <th>租赁价格（元/天）</th>
+                            <th>操作</th>
+                        </tr>
+                    </table>
                 </div>
+
 
             </div>
         </body>
@@ -167,12 +222,40 @@ class HireHome {
         this.$userinfo_name_edit_button = this.$home.find('button[id="user_name_edit_button"]');
         this.$userinfo_name_edit = this.$home.find('div[id="user_name_edit"]');
         this.$userinfo_name_edit_submit_button = this.$home.find('button[id="user_name_edit_submit_button"]');
-        this.$userinfo_name_edit_cancal_button = this.$home.find('button[id="user_name_edit_cancal_button"]');
+        this.$userinfo_name_edit_cancal_button = this.$home.find('button[id="user_name_edit_cancel_button"]');
         this.$userinfo_name_newname = this.$home.find('input[class="user_name_input"]');
         this.$userinfo_name_edit_error = this.$home.find('div[id="user_name_edit_error"]');
         this.$userinfo_name_edit.hide();
 
         this.$logout = this.$home.find('button[id="logout_button"]');
+
+        this.$map = this.$home.find('div[id="map"]');
+        // Add map locations
+        this.locations = [
+            { name: "南京浦口店", x: "20%", y: "30%" },
+            { name: "南京鼓楼店", x: "50%", y: "50%" },
+            { name: "南京江宁店", x: "70%", y: "80%" },
+            { name: "南京雨花店", x: "30%", y: "60%" },
+            { name: "南京秦淮店", x: "80%", y: "20%" }
+        ];
+
+        this.$userinfo_sex_output = this.$home.find('div[id="user_sex_output"]');
+        this.$userinfo_sex_edit_button = this.$home.find('button[id="user_sex_edit_button"]');
+        this.$userinfo_sex_edit = this.$home.find('div[id="user_sex_edit"]');
+        this.$userinfo_sex_edit_submit_button = this.$home.find('button[id="user_sex_edit_submit_button"]');
+        this.$userinfo_sex_edit_cancel_button = this.$home.find('button[id="user_sex_edit_cancel_button"]');
+        this.$userinfo_sex_newsex = this.$home.find('select[class="user_sex_input"]');
+        this.$userinfo_sex_edit_error = this.$home.find('div[id="user_sex_edit_error"]');
+        this.$userinfo_sex_edit.hide();
+
+        this.$userinfo_phone_output = this.$home.find('div[id="user_phone_output"]');
+        this.$userinfo_phone_edit_button = this.$home.find('button[id="user_phone_edit_button"]');
+        this.$userinfo_phone_edit = this.$home.find('div[id="user_phone_edit"]');
+        this.$userinfo_phone_edit_submit_button = this.$home.find('button[id="user_phone_edit_submit_button"]');
+        this.$userinfo_phone_edit_cancel_button = this.$home.find('button[id="user_phone_edit_cancel_button"]');
+        this.$userinfo_phone_newphone = this.$home.find('input[class="user_phone_input"]');
+        this.$userinfo_phone_edit_error = this.$home.find('div[id="user_phone_edit_error"]');
+        this.$userinfo_phone_edit.hide();
     
         this.start();
     }
@@ -193,9 +276,19 @@ class HireHome {
         this.add_event_show_userinfo_name_edit();
         this.add_event_show_userinfo_name_output();
         this.show_userinfo_name();
+        this.show_userinfo_sex();
+        this.show_userinfo_phone();
         this.add_event_submit_userinfo_name();
         this.show_car_select();
         this.add_event_car_select();
+        this.add_event_click_hire();
+        this.add_event_click_return();
+        this.add_event_show_userinfo_sex_edit();
+        this.add_event_show_userinfo_sex_output();
+        this.add_event_submit_userinfo_sex();
+        this.add_event_show_userinfo_phone_edit();
+        this.add_event_show_userinfo_phone_output();
+        this.add_event_submit_userinfo_phone();
     }
 
     add_event_click_mainpage() {
@@ -216,6 +309,8 @@ class HireHome {
             $('.menu_item button').removeClass('current');
             outer.$hire_detial_button.addClass('current');
         });
+
+        this.load_vehicles_detail();
     }
 
     add_event_click_map() {
@@ -226,6 +321,8 @@ class HireHome {
             $('.menu_item button').removeClass('current');
             outer.$hire_map_button.addClass('current');
         });
+
+        outer.render_map();
     }
 
     add_event_click_activity() {
@@ -256,6 +353,7 @@ class HireHome {
             $('.menu_item button').removeClass('current');
             outer.$dropdown_menu.hide();
         });
+        outer.load_user_orders();
     }
     
     add_event_logout() {
@@ -337,15 +435,143 @@ class HireHome {
         });
     }
 
-    add_event_car_select() {
+    add_event_show_userinfo_sex_edit() {
         let outer = this;
-        this.$car_select_submit_button.on('click', function() {
-            let store = outer.$store_select.val();
-            let time = outer.$time_select.val();
-            console.log(store, time);
+
+        this.$userinfo_sex_edit_button.on('click', function() {
+            outer.show_userinfo_sex_edit();
         });
     }
-    
+
+    add_event_show_userinfo_sex_output() {
+        let outer = this;
+
+        this.$userinfo_sex_edit_cancel_button.on('click', function() {
+            outer.show_userinfo_sex_output();
+        });
+    }
+
+    add_event_submit_userinfo_sex() {
+        let outer = this;
+
+        this.$userinfo_sex_edit_submit_button.on('click', function() {
+            outer.edit_userinfo_sex();
+        });
+    }
+
+    show_userinfo_sex() {
+        let outer = this;
+        
+        $.ajax({
+            url: '/home/show_sex',
+            type: 'GET',
+            success: function(resp) {
+                outer.$userinfo_sex_output.find('.info_output').text(resp.result);
+            },
+        });
+    }
+
+    edit_userinfo_sex() {
+        let outer = this;
+        let newsex = this.$userinfo_sex_newsex.val();
+        this.$userinfo_sex_edit_error.empty();
+
+        $.ajax({
+            url: '/home/edit_sex',
+            type: 'GET',
+            data: {
+                newsex: newsex,
+            },
+            success: function(resp) {
+                console.log(newsex, resp);
+                if (resp.result == 'success') {
+                    outer.show_userinfo_sex_output();
+                    outer.show_userinfo_sex();
+                } else {
+                    outer.$userinfo_sex_edit_error.text(resp.result);
+                }
+            },
+        });
+    }
+
+    show_userinfo_phone() {
+        let outer = this;
+        
+        $.ajax({
+            url: '/home/show_phone',
+            type: 'GET',
+            success: function(resp) {
+                outer.$userinfo_phone_output.find('.info_output').text(resp.result);
+            },
+        });
+    }
+
+    edit_userinfo_phone() {
+        let outer = this;
+        let newphone = this.$userinfo_phone_newphone.val();
+        this.$userinfo_phone_edit_error.empty();
+
+        $.ajax({
+            url: '/home/edit_phone',
+            type: 'GET',
+            data: {
+                newphone: newphone,
+            },
+            success: function(resp) {
+                console.log(newphone, resp);
+                if (resp.result == 'success') {
+                    outer.show_userinfo_phone_output();
+                    outer.show_userinfo_phone();
+                } else {
+                    outer.$userinfo_phone_edit_error.text(resp.result);
+                }
+            },
+        });
+    }
+
+    show_userinfo_sex_output() {
+        this.$userinfo_sex_output.show();
+        this.$userinfo_sex_edit.hide();
+    }
+
+    show_userinfo_sex_edit() {
+        this.$userinfo_sex_edit.show();
+        this.$userinfo_sex_output.hide();
+    }
+
+    add_event_show_userinfo_phone_edit() {
+        let outer = this;
+
+        this.$userinfo_phone_edit_button.on('click', function() {
+            outer.show_userinfo_phone_edit();
+        });
+    }
+
+    add_event_show_userinfo_phone_output() {
+        let outer = this;
+
+        this.$userinfo_phone_edit_cancel_button.on('click', function() {
+            outer.show_userinfo_phone_output();
+        });
+    }
+
+    add_event_submit_userinfo_phone() {
+        let outer = this;
+
+        this.$userinfo_phone_edit_submit_button.on('click', function() {
+            outer.edit_userinfo_phone();
+        });
+    }
+
+    show_userinfo_phone_output() {
+        this.$userinfo_phone_output.show();
+        this.$userinfo_phone_edit.hide();
+    }
+
+    show_userinfo_phone_edit() {
+        this.$userinfo_phone_edit.show();
+        this.$userinfo_phone_output.hide();
+    }
 
     show_car_select() {
         let outer = this;
@@ -355,11 +581,11 @@ class HireHome {
                 <label for="store">门店:</label>
                 <select id="store" class="car_select_dropdown">
                     <option value="all_store">不限</option>
-                    <option value="pukou<">南京浦口店</option>
-                    <option value="gulou">南京鼓楼店</option>
-                    <option value="jiangning">南京江宁店</option>
-                    <option value="yuhua">南京雨花店</option>
-                    <option value="qinhuai">南京秦淮店</option>
+                    <option value="南京浦口店">南京浦口店</option>
+                    <option value="南京鼓楼店">南京鼓楼店</option>
+                    <option value="南京江宁店">南京江宁店</option>
+                    <option value="南京雨花店">南京雨花店</option>
+                    <option value="南京秦淮店">南京秦淮店</option>
                 </select>
 
                 <label for="time">时间:</label>
@@ -374,6 +600,152 @@ class HireHome {
         this.$car_select_submit_button = this.$car_select.find('#car_select_submit_button');
     }
     
+    add_event_car_select() {
+        let outer = this;
+        this.$car_select_submit_button.on('click', function() {
+            let store = outer.$store_select.val();
+            let time = outer.$time_select.val();
+            outer.load_vehicles_detail(store, time);
+            outer.show_detial();
+            $('.menu_item button').removeClass('current');
+            outer.$hire_detial_button.addClass('current');
+        });
+    }
+
+    load_vehicles_detail(store, time) {
+        $.ajax({
+            url: '/order/get_vehicle_info/',
+            type: 'GET',
+            data: {
+                store: store,
+                time: time,
+            },
+            success: (data) => {
+                this.render_vehicles_detail(data);
+            },
+            error: (error) => {
+                console.error('Error fetching vehicles:', error);
+            }
+        });
+    }
+
+    render_vehicles_detail(vehicles) {
+        const $table = $('#vehicle_table1');
+        $table.find("tr:gt(0)").remove();
+
+        vehicles.forEach((vehicle) => {
+            const $row = $(`
+                <tr>
+                    <td>${vehicle.store}</td>
+                    <td>${vehicle.brand}</td>
+                    <td>${vehicle.model}</td>
+                    <td>${vehicle.category}</td>
+                    <td>${vehicle.hire_price}</td>
+                    <td>${vehicle.is_hired}</td>
+                    <td>
+                        ${vehicle.is_hired ? '已租用' : `<button class="choose_button" data-id="${vehicle.id}">租用</button>`}
+                    </td>
+                </tr>
+            `);
+            $table.append($row);
+        });
+    }
+    
+    add_event_click_hire() {
+        let outer = this;
+    
+        this.$home.on('click', '.choose_button', function() {
+            let vehicle_id = $(this).data('id');
+    
+            $.ajax({
+                url: `/home/hire_vehicle/${vehicle_id}/`,
+                type: 'GET',
+                data: {
+                    'vehicle_id': vehicle_id,
+                },
+                success: function(resp) {
+                    if (resp.result === 'success') {
+                        alert('租用成功！');
+                        location.reload();// 刷新车辆列表
+                    } else {
+                        alert(resp.message);
+                    }
+                },
+            });
+        });
+    }
+    
+    add_event_click_return() {
+        let outer = this;
+    
+        this.$home.on('click', '.return_button', function() {
+            let vehicle_id = $(this).data('id');
+    
+            $.ajax({
+                url: `/home/return_vehicle/${vehicle_id}/`,
+                type: 'GET',
+                data: {
+                    'vehicle_id': vehicle_id,
+                },
+                success: function(resp) {
+                    if (resp.result === 'success') {
+                        alert('归还成功！');
+                        location.reload(); // 刷新用户订单列表
+                    } else {
+                        alert(resp.message);
+                    }
+                },
+            });
+        });
+    }
+    
+
+    // 在加载用户订单页面时，发送 AJAX 请求获取用户订单信息并显示在页面上
+    load_user_orders() {
+        $.ajax({
+            url: `/home/get_user_orders/`,
+            type: 'GET',
+            success: (data) => {
+                this.render_user_orders(data);
+            },
+            error: (error) => {
+                console.error('Error fetching user orders:', error);
+            }
+        });
+    }
+
+    // 渲染用户订单信息到页面上
+    render_user_orders(orders) {
+        const $table = $('#user_order_table');
+        $table.find("tr:gt(0)").remove();
+
+        orders.forEach((order) => {
+            const $row = $(`
+                <tr>
+                    <td>${order.store}</td>
+                    <td>${order.brand}</td>
+                    <td>${order.model}</td>
+                    <td>${order.category}</td>
+                    <td>${order.hired_date}</td>
+                    <td>${order.hire_price}</td>
+                    <td>
+                        <button class="return_button" data-id="${order.id}">归还</button>
+                    </td>
+                </tr>
+            `);
+            $table.append($row);
+        });
+    }
+
+    render_map() {
+        this.$map.empty(); // Clear any existing markers
+
+        this.locations.forEach(location => {
+            const $marker = $(`<div class="location" title="${location.name}">${location.name}</div>`);
+            $marker.css({ top: location.y, left: location.x });
+            this.$map.append($marker);
+        });
+    }
 
     show_mainpage() {
         this.$hire_mainpage.show();

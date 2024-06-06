@@ -13,5 +13,6 @@ class Vehicle(models.Model):
     hire_price = models.DecimalField(max_digits=7, decimal_places=2, help_text='单位：元/天')
 
     def __str__(self):
-        return f"{self.brand} {self.model} - {self.category}"
+        return f"{self.brand} {self.model} - {self.category} ({self.store})"
+
 
