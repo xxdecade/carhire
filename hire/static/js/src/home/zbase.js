@@ -88,8 +88,8 @@ class HireHome {
                     </div>
                 </div>
 
-                <div id="hire_map" class="content">
-                    <div id="map"></div>
+                <div id="hire_map">
+                    <div id="map" style="width: 100%; height: 1000px;"></div>
                 </div>
 
                 <div id="hire_activity" class="content">
@@ -232,11 +232,11 @@ class HireHome {
         this.$map = this.$home.find('div[id="map"]');
         // Add map locations
         this.locations = [
-            { name: "南京浦口店", x: "20%", y: "30%" },
-            { name: "南京鼓楼店", x: "50%", y: "50%" },
-            { name: "南京江宁店", x: "70%", y: "80%" },
-            { name: "南京雨花店", x: "30%", y: "60%" },
-            { name: "南京秦淮店", x: "80%", y: "20%" }
+            { name: "南京浦口店", x: "118.62", y: "32.05" },
+            { name: "南京鼓楼店", x: "118.80", y: "32.07" },
+            { name: "南京江宁店", x: "118.82", y: "31.95" },
+            { name: "南京雨花店", x: "118.78", y: "31.99" },
+            { name: "南京秦淮店", x: "118.77", y: "32.05" }
         ];
 
         this.$userinfo_sex_output = this.$home.find('div[id="user_sex_output"]');
@@ -738,12 +738,21 @@ class HireHome {
     }
 
     render_map() {
-        this.$map.empty(); // Clear any existing markers
-
+        // Clear existing map content if any
+        this.$map.empty();
+    
+        // Initialize Baidu Map
+        var map = new BMap.Map("map"); // Create a Map instance
+        var point = new BMap.Point(118.22, 32.30); // Set a point representing the geographical coordinates (Nanjing)
+        map.centerAndZoom(point, 12); // Initialize the map, set the center point and the map zoom level
+        map.enableScrollWheelZoom(true); // Enable scroll wheel zooming
+    
+        // Add markers to the map
         this.locations.forEach(location => {
-            const $marker = $(`<div class="location" title="${location.name}">${location.name}</div>`);
-            $marker.css({ top: location.y, left: location.x });
-            this.$map.append($marker);
+            var markerPoint = new BMap.Point(location.x, location.y);
+            var marker = new BMap.Marker(markerPoint); // Create a marker at the specified location
+            map.addOverlay(marker); // Add the marker to the map
+            marker.setLabel(new BMap.Label(location.name, {offset:new BMap.Size(20,-10)})); // Add labels to the markers
         });
     }
 
