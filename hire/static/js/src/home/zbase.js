@@ -93,7 +93,8 @@ class HireHome {
                 </div>
 
                 <div id="hire_activity" class="content">
-                    <a>精彩活动</a>
+                    <br><br><br>
+                    <a style="margin-top: 50px">暂未推出,敬请期待...</a>
                 </div>
 
                 <div id="userinfo_page" class="content">
