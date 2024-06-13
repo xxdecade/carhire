@@ -57,9 +57,13 @@ class AdminHome {
     render_vehicles(vehicles) {
         const $table = $('#vehicle_table');
         vehicles.forEach((vehicle) => {
-            const hireInfo = vehicle.is_hired
-                ? `<td>${vehicle.hire_start}</td><td>${vehicle.hire_end}</td>`
-                : '<td></td><td></td>';
+            const hireInfo1 = vehicle.is_hired
+                ? `<td>${vehicle.hired_date}</td>`
+                : '<td>未租用</td>';
+
+            const hireInfo2 = vehicle.is_hired
+                ? `<td>未归还</td>`
+                : `<td>${vehicle.return_date}</td>`;
             const $row = $(`
                 <tr>
                     <td>${vehicle.store}</td>
@@ -67,7 +71,8 @@ class AdminHome {
                     <td>${vehicle.model}</td>
                     <td>${vehicle.category}</td>
                     <td>${vehicle.is_hired ? '是' : '否'}</td>
-                    ${hireInfo}
+                    ${hireInfo1}
+                    ${hireInfo2}
                     <td>${vehicle.hire_price}</td>
                     <td>
                         <button class="edit_button" data-id="${vehicle.id}">编辑</button>

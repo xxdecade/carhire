@@ -237,6 +237,73 @@
     border-radius: 30px;
 }
 
+#hire_detial {
+    padding: 20px;
+    margin-top: 70px; /* To account for the fixed header */
+    background: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+#vehicle_table1 {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#vehicle_table1 th {
+    background-color: #007bff;
+    color: white;
+    font-weight: normal;
+    padding: 15px 10px;
+    text-align: left;
+}
+
+#vehicle_table1 td {
+    padding: 15px 10px;
+    border-top: 1px solid #dee2e6;
+}
+
+#vehicle_table1 tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.choose_button {
+    padding: 8px 16px;
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.choose_button:hover {
+    background-color: #218838;
+}
+
+.detail_container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.detail_item {
+    flex: 1;
+    padding: 10px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-right: 20px;
+}
+
+.detail_item:last-child {
+    margin-right: 0;
+}
+
 .userinfo_preview {
     width: 800px;
     height: 150px;
@@ -325,6 +392,93 @@
     height: 100%;
     font-size: 16px;
 }
+
+#userorder_page {
+    padding: 20px;
+    margin-top: 70px; /* To accommodate the fixed header */
+    background: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+#user_order_table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#user_order_table th {
+    background-color: #343a40;
+    color: white;
+    font-weight: normal;
+    padding: 15px 10px;
+    text-align: left;
+}
+
+#user_order_table td {
+    padding: 15px 10px;
+    border-top: 1px solid #dee2e6;
+}
+
+#user_order_table tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+#vehicle_table1 th[data-sort] {
+    cursor: pointer;
+    background-color: #1670ac; /* 轻灰色背景提醒用户可以点击 */
+    position: relative;
+}
+
+#vehicle_table1 th[data-sort]:hover {
+    background-color: #e0e0e0; /* 悬停时颜色更深 */
+}
+
+#vehicle_table1 th[data-sort]::after {
+    content: '⇅'; /* 添加一个默认的排序图标 */
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+.return_button {
+    padding: 8px 16px;
+    color: #fff;
+    background-color: #dc3545;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.return_button:hover {
+    background-color: #c82333;
+}
+
+.order_item_container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.order_item {
+    flex: 1;
+    padding: 10px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-right: 20px;
+}
+
+.order_item:last-child {
+    margin-right: 0;
+}
+
 
 section {
     position: relative;

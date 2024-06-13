@@ -76,12 +76,12 @@ class HireHome {
                         <br><br><br>
                         <table id="vehicle_table1" border="1">
                             <tr>
-                                <th>所在店铺</th>
-                                <th>品牌</th>
-                                <th>型号</th>
-                                <th>类别</th>
-                                <th>租赁价格（元/天）</th>
-                                <th>是否在租</th>
+                                <th data-sort="store">所在店铺 <i class="fa fa-sort"></i></th>
+                                <th data-sort="brand">品牌 <i class="fa fa-sort"></i></th>
+                                <th data-sort="model">型号 <i class="fa fa-sort"></i></th>
+                                <th data-sort="category">类别 <i class="fa fa-sort"></i></th>
+                                <th data-sort="hire_price">租赁价格（元/天） <i class="fa fa-sort"></i></th>
+                                <th data-sort="is_hired">是否在租 <i class="fa fa-sort"></i></th>
                                 <th>操作</th>
                             </tr>
                         </table>
